@@ -75,14 +75,26 @@ public class EmployeeController {
     public Result<String> logout() {
         return Result.success();
     }
+
+    /**
+     * 新增员工
+     * @param employeeDTO
+     * @return
+     */
     @PostMapping
-    @ApiOperation("Add employee")
+    @ApiOperation("新增员工")
     public Result save(@RequestBody EmployeeDTO employeeDTO) {
         log.info("Add employee: {}", employeeDTO);
         System.out.println("current threadID: " + Thread.currentThread().getId());
         employeeService.save(employeeDTO);
         return Result.success();
     }
+
+    /**
+     *员工分页查询
+     * @param employeePageQueryDTO
+     * @return
+     */
     @GetMapping("/page")
     @ApiOperation("员工分页查询")
     public Result<PageResult> page(EmployeePageQueryDTO  employeePageQueryDTO) {
@@ -116,6 +128,7 @@ public class EmployeeController {
         Employee employee = employeeService.getById(id);
         return Result.success(employee);
     }
+
     @PutMapping
     @ApiOperation("编辑员工信息")
     public Result update(@RequestBody EmployeeDTO employeeDTO) {
